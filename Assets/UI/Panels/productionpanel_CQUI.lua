@@ -215,7 +215,7 @@ function GetData()
     local buildQueue = pSelectedCity:GetBuildQueue();
 
     for row in GameInfo.Units() do
-        if row.MustPurchase and buildQueue:CanProduce( row.Hash, true ) and (row.PurchaseYield == "YIELD_FAITH" or row.PurchaseYield == "YIELD_GOLD") then
+        if row.MustPurchase and buildQueue:CanProduce( row.Hash, true ) then
             local isCanProduceExclusion, results     = buildQueue:CanProduce( row.Hash, false, true );
             -- If a unit is purchase only, then "isDisabled" needs to be True, as that disables the button control that
             -- allows the religious units to be enqueued

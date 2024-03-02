@@ -28,7 +28,7 @@ local SIZE_CITYSTATE_ICON       :number = 30;
 local SIZE_PRODUCTION_ICON      :number = 32; -- TODO: Switch this to 38 when the icons go in.
 local SIZE_PANEL_X              :number = 300;
 local TXT_NO_PRODUCTION         :string = Locale.Lookup("LOC_HUD_CITY_PRODUCTION_NOTHING_PRODUCED");
-
+--[[ 《和而不同》模组中重新定义了citizen growth status
 local UV_CITIZEN_GROWTH_STATUS    :table  = {};
         UV_CITIZEN_GROWTH_STATUS[0] = {u=0, v=0};     -- revolt
         UV_CITIZEN_GROWTH_STATUS[1] = {u=0, v=0};     -- unrest
@@ -37,6 +37,17 @@ local UV_CITIZEN_GROWTH_STATUS    :table  = {};
         UV_CITIZEN_GROWTH_STATUS[4] = {u=0, v=100};   -- content (normal)
         UV_CITIZEN_GROWTH_STATUS[5] = {u=0, v=150};   -- happy
         UV_CITIZEN_GROWTH_STATUS[6] = {u=0, v=200};   -- ecstatic
+]]--
+local UV_CITIZEN_GROWTH_STATUS        :table    = {};
+        UV_CITIZEN_GROWTH_STATUS[0] = {u=0, v=0};        -- revolt
+        UV_CITIZEN_GROWTH_STATUS[1] = {u=0, v=0};        -- unrest
+        UV_CITIZEN_GROWTH_STATUS[2] = {u=0, v=0};        -- unhappy
+        UV_CITIZEN_GROWTH_STATUS[3] = {u=0, v=50};        -- displeased
+        UV_CITIZEN_GROWTH_STATUS[4] = {u=0, v=100};        -- content (normal)
+        UV_CITIZEN_GROWTH_STATUS[5] = {u=0, v=150};        -- delighted (new)
+        UV_CITIZEN_GROWTH_STATUS[6] = {u=0, v=200};        -- happy
+        UV_CITIZEN_GROWTH_STATUS[7] = {u=0, v=200};        -- joyful (new)
+        UV_CITIZEN_GROWTH_STATUS[8] = {u=0, v=200};        -- ecstatic
 
 local UV_HOUSING_GROWTH_STATUS    :table = {};
         UV_HOUSING_GROWTH_STATUS[0] = {u=0, v=0};     -- halted
@@ -101,6 +112,8 @@ local m_tabs         = nil;
 
 local m_kEspionageViewManager = EspionageViewManager:CreateManager();
 
+local m_isShowingEnemyCity = false;
+
 -- ==== CQUI CUSTOMIZATION BEGIN ====================================================================================== --
 --CQUI Members
 local CQUI_ShowCityDetailAdvisor :boolean = false;
@@ -137,7 +150,7 @@ LuaEvents.CQUI_CityPanelOverview_CityviewDisable.Add( CQUI_OnCityviewDisabled);
 -- TODO: We need to do figure out why this is happening, having it reactivate the lens every frame does not play well
 --       with everywhere else that uses lenses, border growth, minimap panel, religious units, etc.
 function SetDesiredLens(desiredLens)
-    --print("SetDesiredLens", desiredLens)
+    -- print("SetDesiredLens", desiredLens)
     -- CQUI (Azurency) : Don't reset the lens if in district or building placement mode
     if UI.GetInterfaceMode() == InterfaceModeTypes.DISTRICT_PLACEMENT or UI.GetInterfaceMode() == InterfaceModeTypes.BUILDING_PLACEMENT then
         return;
@@ -233,10 +246,10 @@ function AppendGreatWorksData( data:table )
                     NumGreatWorks = 0,
                     Slots = {},
                 };
-                -- find slot type - a bit tricky
-                for row in GameInfo.Building_GreatWorks() do
-                    if row.BuildingType == buildingType then buildingData.SlotType = row.GreatWorkSlotType; break; end
-                end
+
+                local index:number = 0;
+                local greatWorkSlotType:number = pCityBldgs:GetGreatWorkSlotType(buildingIndex, index);
+                buildingData.SlotType = GameInfo.GreatWorkSlotTypes[greatWorkSlotType].GreatWorkSlotType;
                 -- populate great works
                 for slotIndex:number=0, numSlots - 1 do
                     local slotData:table = {
@@ -692,7 +705,6 @@ end
 
 -- ===========================================================================
 function ViewPanelAmenities( data:table )
-    --print("ViewPanelAmenities");
     -- ==== CQUI CUSTOMIZATION BEGIN ====================================================================================== --
     -- CQUI Show the advisor if configred to do so
     Controls.AmenitiesAdvisorBubble:SetHide( m_kEspionageViewManager:IsEspionageView() or (IsTutorialRunning() == false and CQUI_ShowCityDetailAdvisor == false ));
@@ -815,8 +827,6 @@ function ViewPanelHousing( data:table )
     -- ==== CQUI CUSTOMIZATION BEGIN ====================================================================================== --
     -- CQUI uses its helper functions for the "bubbles" and the RealHousing value
     -- CQUI get real housing from improvements value
-    local selectedCity  = UI.GetHeadSelectedCity();
-    local selectedCityID = selectedCity:GetID();
     local CQUI_HousingFromImprovements = CQUI_GetRealHousingFromImprovements(data.City);
     
     -- Only show the advisor bubbles during the tutorial
@@ -1177,6 +1187,7 @@ end
 
 -- ===========================================================================
 function OnShowEnemyCityOverview( ownerID:number, cityID:number)
+    m_isShowingEnemyCity = true;
     m_kEspionageViewManager:SetEspionageViewCity( ownerID, cityID );
     OnShowOverviewPanel(true);
 end
@@ -1192,6 +1203,7 @@ function KeyHandler( key:number )
         if ( m_isShowingPanel ) then
             -- CQUI behavior change handling escape
             UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
+            OnCloseButtonClicked();
             return true;
         end
     end
@@ -1203,6 +1215,10 @@ end
 function OnInputHandler( pInputStruct:table )
     local uiMsg = pInputStruct:GetMessageType();
     if (uiMsg == KeyEvents.KeyUp) then return KeyHandler( pInputStruct:GetKey() ); end;
+    if (m_isShowingEnemyCity and uiMsg == MouseEvents.RButtonUp and m_isShowingPanel) then
+        OnCloseButtonClicked();
+        return true;
+    end
     return false;
 end
 -- ==== CQUI CUSTOMIZATION END ======================================================================================== --
@@ -1284,6 +1300,7 @@ function OnShowOverviewPanel( isShowing: boolean )
         --local offsetx = Controls.OverviewSlide:GetOffsetX();
         --if (offsetx == 0 and not Controls.OverviewSlide:IsReversing()) then
         -- AZURENCY : only check if it's not already reversing
+        m_isShowingEnemyCity = false;
         if not Controls.OverviewSlide:IsReversing() then
             Controls.PauseDismissWindow:Play();
             Close();
@@ -1300,9 +1317,6 @@ function ToggleOverviewTab(tabButton:table)
     if m_isShowingPanel and m_tabs.selectedControl == tabButton and m_pCity == UI.GetHeadSelectedCity() then
         OnCloseButtonClicked();
     else
-        if not m_isShowingPanel then
-            OnShowOverviewPanel(true);
-        end
         if m_tabs.selectedControl ~= tabButton then
             m_tabs.SelectTab( tabButton );
         end

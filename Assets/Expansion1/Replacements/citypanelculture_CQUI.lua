@@ -22,6 +22,9 @@ end
 --  Hide 
 -- ===========================================================================
 function OnRefresh()
+
+    BASE_CQUI_OnRefresh();
+
     if ContextPtr:IsHidden() then
         return;
     end
@@ -35,13 +38,11 @@ function OnRefresh()
     if (pCity == nil) then
         return;
     end
-
-    BASE_CQUI_OnRefresh();
-
+    
   -- AZURENCY : hide the advisor if option is disabled
-  if not Controls.CulturalIdentityAdvisor:IsHidden() then
-      Controls.CulturalIdentityAdvisor:SetHide( CQUI_ShowCityDetailAdvisor == false );
-  end
+    if not Controls.CulturalIdentityAdvisor:IsHidden() then
+        Controls.CulturalIdentityAdvisor:SetHide( CQUI_ShowCityDetailAdvisor == false );
+    end
 
 end
 

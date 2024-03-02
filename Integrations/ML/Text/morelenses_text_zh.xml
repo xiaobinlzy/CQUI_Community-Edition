@@ -25,6 +25,15 @@
     <Replace Tag="LOC_HUD_BUILDER_LENS_PN" Language="zh_Hans_CN">
       <Text>无法改良</Text>
     </Replace>
+    <Replace Tag="LOC_HUD_BUILDER_LENS_P1B" Language="zh_Hans_CN">
+        <Text>加成资源</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_BUILDER_LENS_P1L" Language="zh_Hans_CN">
+        <Text>奢侈品资源</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_BUILDER_LENS_P1S" Language="zh_Hans_CN">
+        <Text>战略资源</Text>
+    </Replace>
 
     <!-- Archaeologist Lens -->
     <Replace Tag="LOC_HUD_ARCHAEOLOGIST_LENS" Language="zh_Hans_CN">
@@ -75,10 +84,13 @@
       <Text>高亮显示地图上的资源</Text>
     </Replace>
     <Replace Tag="LOC_HUD_RESOURCE_LENS_LUXCONNECTED" Language="zh_Hans_CN">
-      <Text>已开发奢侈资源</Text>
+      <Text>奢侈品资源</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_RESOURCE_LENS_LUXCONNECTED" Language="zh_Hans_CN">
+      <Text>已开发奢侈品资源</Text>
     </Replace>
     <Replace Tag="LOC_HUD_RESOURCE_LENS_LUXNCONNECTED" Language="zh_Hans_CN">
-      <Text>奢侈资源</Text>
+      <Text>奢侈品资源</Text>
     </Replace>
     <Replace Tag="LOC_HUD_RESOURCE_LENS_STRATCONNECTED" Language="zh_Hans_CN">
       <Text>已开发战略资源</Text>
@@ -126,17 +138,35 @@
       <Text>部落村庄</Text>
     </Replace>
 
-    <Replace Tag="LOC_HUD_ROUTES_LENS" Language="zh_Hans">
+    <!-- Naturalist Lens -->
+    <Replace Tag="LOC_HUD_NATURALIST_LENS" Language="zh_Hans_CN">
+        <Text>自然学家</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_NATURALIST_LENS_TOOLTIP" Language="zh_Hans_CN">
+        <Text>高亮可建成国家公园的单元格</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_NATURALIST_LENS_PARK" Language="zh_Hans_CN">
+        <Text>可直接建成国家公园的单元格</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_NATURALIST_LENS_OK" Language="zh_Hans_CN">
+        <Text>若某些其他单元格被修复则可用作国家公园的单元格</Text>
+    </Replace>
+    <Replace Tag="LOC_HUD_NATURALIST_LENS_FIXABLE" Language="zh_Hans_CN">
+        <Text>需作改善以修建国家公园的单元格</Text>
+    </Replace>
+
+
+    <Replace Tag="LOC_HUD_ROUTES_LENS" Language="zh_Hans_CN">
       <Text>路线</Text>
     </Replace>
-    <Replace Tag="LOC_HUD_ROUTES_LENS_RAIL" Language="zh_Hans">
+    <Replace Tag="LOC_HUD_ROUTES_LENS_RAIL" Language="zh_Hans_CN">
       <Text>铁路</Text>
     </Replace>
-    <Replace Tag="LOC_HUD_ROUTES_LENS_ROAD" Language="zh_Hans">
+    <Replace Tag="LOC_HUD_ROUTES_LENS_ROAD" Language="zh_Hans_CN">
       <Text>道路</Text>
     </Replace>
-    <Replace Tag="LOC_HUD_ROUTES_LENS_TOOLTIP" Language="zh_Hans">
-      <Text>突出道路和铁路</Text>
+    <Replace Tag="LOC_HUD_ROUTES_LENS_TOOLTIP" Language="zh_Hans_CN">
+      <Text>高亮显示道路和铁路</Text>
     </Replace>
 
   </LocalizedText>

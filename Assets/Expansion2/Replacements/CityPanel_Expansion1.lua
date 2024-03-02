@@ -3,7 +3,12 @@
 
 include("CityPanel");
 BASE_CQUI_ViewMain = ViewMain;
+include( "EspionageViewManager" );
+local m_kEspionageViewManager = EspionageViewManager:CreateManager();
 
+function CQUI_OnShowEnemyCityOverview( ownerID:number, cityID:number)
+    m_kEspionageViewManager:SetEspionageViewCity( ownerID, cityID );
+end
 -- ===========================================================================
 function ViewMain( kData:table )
     BASE_CQUI_ViewMain( kData );
@@ -11,11 +16,13 @@ function ViewMain( kData:table )
     -- ==== CQUI CUSTOMIZATION BEGIN ====================================================================================== --
     -- swarsele: change religious citizens to loyalty
     local pCity = UI.GetHeadSelectedCity()
+    if pCity == nil then
+        pCity = m_kEspionageViewManager:GetEspionageViewCity();
+    end
     if pCity ~= nil then
         local pCulturalIdentity = pCity:GetCulturalIdentity();
         local currentLoyalty = pCulturalIdentity:GetLoyalty();
         local loyaltyPerTurn:number = pCulturalIdentity:GetLoyaltyPerTurn();
-
         Controls.ReligionIcon:SetIcon("ICON_STAT_CULTURAL_FLAG");
         Controls.ReligionLabel:SetText(Locale.Lookup("LOC_CULTURAL_IDENTITY_LOYALTY_SUBSECTION"));
         if Controls.CQUI_Loyalty ~= nil then
@@ -46,4 +53,5 @@ end
 -- ===========================================================================
 function LateInitialize()
     Events.CityLoyaltyChanged.Add(OnCityLoyaltyChanged);
+    LuaEvents.CityBannerManager_ShowEnemyCityOverview.Add(CQUI_OnShowEnemyCityOverview);
 end

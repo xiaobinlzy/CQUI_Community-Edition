@@ -1,31 +1,12 @@
 /*
     ╔════════════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                   CQUI Default settings                                    ║
-    ╠════════════════════════════════════════════════════════════════════════════════════════════╣
-    ║ Created by LordYanaek for CQUI mod by chaorace.                                            ║
-    ║ These are the settings loaded by DEFAULT in CQUI.                                          ║
-    ║                                                                                            ║
-    ║ !!! Attention: Don't write your custom settings in the original copy of this file !!!      ║
-    ║                                                                                            ║
-    ║ This file is where all default settings are stored, all changes to this file are lost      ║
-    ║ whenever updating to a new CQUI version (particularly if using the Steam Workshop version).║
-    ║                                                                                            ║
-    ║ To change default settings permanently without the risk of losing them, create a           ║
-    ║ copy of this file named "cqui_settings_local.sql" and make your changes there.             ║
-    ║ The "cqui_settings_local.sql" file does not need to be a perfect copy and will work as     ║
-    ║ long as it's valid SQL.                                                                    ║
-    ╚════════════════════════════════════════════════════════════════════════════════════════════╝
+    �                                  CQUI Default settings                                    �    ╠════════════════════════════════════════════════════════════════════════════════════════════╣
+    �Created by LordYanaek for CQUI mod by chaorace.                                            �    �These are the settings loaded by DEFAULT in CQUI.                                          �    �                                                                                           �    �!!! Attention: Don't write your custom settings in the original copy of this file !!!      �    �                                                                                           �    �This file is where all default settings are stored, all changes to this file are lost      �    �whenever updating to a new CQUI version (particularly if using the Steam Workshop version).�    �                                                                                           �    �To change default settings permanently without the risk of losing them, create a           �    �copy of this file named "cqui_settings_local.sql" and make your changes there.             �    �The "cqui_settings_local.sql" file does not need to be a perfect copy and will work as     �    �long as it's valid SQL.                                                                    �    ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 */
 
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Checkbox settings                                       │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the default state of the CQUI configuration checkboxes.              │
-    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Checkbox settings                                       �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the default state of the CQUI configuration checkboxes.              �    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
     VALUES  ("CQUI_AlwaysOpenTechTrees", 0), -- Always opens the full tech trees instead of the civic/research picker panels
@@ -39,8 +20,8 @@ INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
         ("CQUI_ShowCultureGrowth", 1), -- Shows cultural growth overlay in cityview
         ("CQUI_ShowPolicyReminder", 1),
         ("CQUI_AutoRepeatTechCivic", 0), -- Automatically repeat techs and civics if repeatable (Only Future Tech/Civic in base game)
-        ("CQUI_ShowLuxuries", 1), -- Luxury resources will show in the top-bar next to strategic resources
-        ("CQUI_ShowUnitPaths", 1), -- Shows unit paths on hover and selection
+        ("CQUI_ShowLuxuries", 0), -- Luxury resources will show in the top-bar next to strategic resources
+        ("CQUI_ShowUnitPaths", 0), -- Shows unit paths on hover and selection
         ("CQUI_ShowYieldsOnCityHover", 1), -- Shows city management info like citizens, tile yields, and tile growth on hover
         ("CQUI_Smartbanner", 1), -- Additional informations such as districts will show in the city banner
         ("CQUI_Smartbanner_UnlockedCitizen", 0), -- Shows if city have Unmanaged citizens in the banner
@@ -53,8 +34,8 @@ INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
         ("CQUI_TechPopupAudio", 1), -- Automatically play the voiceovers when you discover a new tech or civic (this is the normal behavior for the unmoded game)
         ("CQUI_WonderBuiltPopupVisual", 1), -- Wonder movies will be displayed when you complete a wonder (this is the normal behavior for the unmoded game)
         ("CQUI_WonderBuiltPopupAudio", 1), -- Wonder quote audio will be played when you complete a wonder (this is the normal behavior for the unmoded game)
-        ("CQUI_ToggleYieldsOnLoad", 1), -- Toggles yields immediately on load
-        ('CQUI_ShowCitizenIconsOnCityHover', 0), -- Shows citizen icons when hovering over city banner
+        ("CQUI_ToggleYieldsOnLoad", 0), -- Toggles yields immediately on load
+        ('CQUI_ShowCitizenIconsOnCityHover', 1), -- Shows citizen icons when hovering over city banner
         ('CQUI_ShowCityManageAreaOnCityHover', 1), -- Shows citizen management area when hovering over city banner
         ('CQUI_ShowCityManageOverLenses', 0), -- Shows citizen management over other lenses applied in city view (religion, loyalty, and power)
         ('CQUI_TraderAddDivider', 1), -- Adds a divider between groups in TradeOverview panel
@@ -77,29 +58,15 @@ INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
         ('CQUI_ShowDebugPrint', 0); -- Shows print in the console
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Combobox settings                                       │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the default state of the CQUI configuration comboboxes.              │
-    │Different values can be used depending on individual settings.                              │
-    │Don't change the names of the settings or the first line!                                   │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Combobox settings                                       �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the default state of the CQUI configuration comboboxes.              �    │Different values can be used depending on individual settings.                              �    │Don't change the names of the settings or the first line!                                   �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
-    VALUES  ("CQUI_BindingsMode", 1), -- Set of keybindings used │ 0=Civ6 default │ 1=keybinds from Civ5 |
+    VALUES  ("CQUI_BindingsMode", 1), -- Set of keybindings used �0=Civ6 default �1=keybinds from Civ5 |
         ("CQUI_ResourceDimmingStyle", 1), -- Affects the way resource icons look when they have been improved  | 0=No Change | 1=Transparent | 2=Hidden |
         ('CQUI_ShowSuzerainInCityStateBanner', 1); -- Show the Icon of the Suzerain Civilization in the CityState Banner | 0 = No Suzerain | 1 = Civ Icon | 2 = Leader Icon
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Slider settings                                         │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the default value of the CQUI configuration sliders.                 │
-    │Different values can be used depending on individual settings.                              │
-    │Don't change the names of the settings or the first line!                                   │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Slider settings                                         �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the default value of the CQUI configuration sliders.                 �    │Different values can be used depending on individual settings.                              �    │Don't change the names of the settings or the first line!                                   �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
     VALUES  ("CQUI_SmartWorkIconSize", 64), -- Size used for "smart" work icons. This size is applied to work icons that are currently locked if the smart work icon option is enabled. Recommended values fall between 48 and 128, though any positive multiple of 8 could work (non-multiples are rounded down)
@@ -109,16 +76,10 @@ INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
         ('CQUI_InlineCityStateQuestFontSize', 10); -- Font size of the inline City State Quest font
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Gossip settings                                         │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the default state of the Gossip message checkboxes                   │
-    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Gossip settings                                         �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the default state of the Gossip message checkboxes                   �    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
-    VALUES  ("CQUI_TrimGossip", 1), --Trims the source from the start of gossip messages
+    VALUES  ("CQUI_TrimGossip", 0), --Trims the source from the start of gossip messages
         --Values controlling individual gossip messages
         ("CQUI_LOC_GOSSIP_AGENDA_KUDOS", 0),
         ("CQUI_LOC_GOSSIP_AGENDA_WARNING", 1),
@@ -199,12 +160,7 @@ INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
         ("CQUI_LOC_GOSSIP_RANDOM_EVENT", 1);
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Key Binding Information                                 │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the key bindings used when CQUI_BindingsMode is not 0                │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Key Binding Information                                 �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the key bindings used when CQUI_BindingsMode is not 0                �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Bindings -- Don't touch this line!
     VALUES
@@ -230,13 +186,7 @@ INSERT OR REPLACE INTO CQUI_Bindings -- Don't touch this line!
         ("PLACE_PIN", "Shift+P", "LOC_CQUI_PLACE_PIN");
 
 /*
-    ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-    │                                    Notification settings                                   │
-    ├────────────────────────────────────────────────────────────────────────────────────────────┤
-    │These settings control the default state of the Notification checkboxes                     │
-    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     │
-    └────────────────────────────────────────────────────────────────────────────────────────────┘
-*/
+    ┌────────────────────────────────────────────────────────────────────────────────────────────�    �                                   Notification settings                                   �    ├────────────────────────────────────────────────────────────────────────────────────────────�    │These settings control the default state of the Notification checkboxes                     �    │Valid values are 0 (disabled) or 1 (enabled). Don't change the names or the first line!     �    └────────────────────────────────────────────────────────────────────────────────────────────�*/
 
 INSERT OR REPLACE INTO CQUI_Settings -- Don't touch this line!
     VALUES  ("CQUI_NotificationGoodyHut", 1), -- Notification - goody hut reward
