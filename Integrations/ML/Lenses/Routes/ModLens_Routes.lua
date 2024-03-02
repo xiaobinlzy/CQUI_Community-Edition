@@ -64,12 +64,12 @@ local function OnUnitSelectionChanged( playerID:number, unitID:number, hexI:numb
         local unitType = GetUnitTypeFromIDs(playerID, unitID)
         if unitType then
             if bSelected then
-                if unitType == "UNIT_MILITARY_ENGINEER" and AUTO_APPLY_ENGINEER_LENS then
+                if (unitType == "UNIT_MILITARY_ENGINEER" or unitType == "UNIT_LEU_INVESTOR" or unitType == "UNIT_LEU_TYCOON") and AUTO_APPLY_ENGINEER_LENS then
                     ShowRoutesLens()
                 end
             -- Deselection
             else
-                if unitType == "UNIT_MILITARY_ENGINEER" and AUTO_APPLY_ENGINEER_LENS then
+                if (unitType == "UNIT_MILITARY_ENGINEER" or unitType == "UNIT_LEU_INVESTOR" or unitType == "UNIT_LEU_TYCOON") and AUTO_APPLY_ENGINEER_LENS then
                     ClearRoutesLens()
                 end
             end
@@ -95,7 +95,7 @@ function OnUnitCaptured( currentUnitOwner, unit, owningPlayer, capturingPlayer )
     local localPlayer = Game.GetLocalPlayer()
     if owningPlayer == localPlayer then
         local unitType = GetUnitTypeFromIDs(owningPlayer, unitID)
-        if unitType and unitType == "UNIT_MILITARY_ENGINEER" and AUTO_APPLY_ENGINEER_LENS then
+        if unitType and (unitType == "UNIT_MILITARY_ENGINEER" or unitType == "UNIT_LEU_INVESTOR" or unitType == "UNIT_LEU_TYCOON") and AUTO_APPLY_ENGINEER_LENS then
             ClearRoutesLens()
         end
     end

@@ -1510,19 +1510,10 @@ end
 
 -- ===========================================================================
 function CQUI_OnCityviewEnabled()
-    -- Slide the minimap over
-    Controls.MiniMapAnimSideways:SetToBeginning();
-    Controls.MiniMapAnimSideways:Play();
-    -- Disable the buttons that do not work well while in City View
-    ToggleButtonsWhenCityViewShown(true);
 end
 
 -- ===========================================================================
 function CQUI_OnCityviewDisabled()
-    -- Slide the minimap back
-    Controls.MiniMapAnimSideways:Reverse();
-    -- Enable the buttons that were disabled
-    ToggleButtonsWhenCityViewShown(false);
 end
 
 -- ===========================================================================
