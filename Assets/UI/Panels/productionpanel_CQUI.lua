@@ -205,17 +205,22 @@ end
 -- ===========================================================================
 function GetData()
     local new_data = BASE_GetData()
+    local playerID:number = Game.GetLocalPlayer();
+    local pPlayer:table = Players[playerID];
 
     local pSelectedCity:table = UI.GetHeadSelectedCity();
-    if pSelectedCity == nil then
+    if pPlayer == nil or pSelectedCity == nil then
         Close();
         return nil;
     end
 
+    local playerReligion = pPlayer:GetReligion();
     local buildQueue = pSelectedCity:GetBuildQueue();
+    local cityGold      = pSelectedCity:GetGold();
+    local cityBuildings = pSelectedCity:GetBuildings();
 
     for row in GameInfo.Units() do
-        if row.MustPurchase and buildQueue:CanProduce( row.Hash, true ) then
+        if row.MustPurchase and buildQueue:CanProduce( row.Hash, true ) and (row.PurchaseYield == "YIELD_GOLD" or row.PurchaseYield == "YIELD_FAITH" or cityGold:IsUnitFaithPurchaseEnabled( row.Hash )) then
             local isCanProduceExclusion, results     = buildQueue:CanProduce( row.Hash, false, true );
             -- If a unit is purchase only, then "isDisabled" needs to be True, as that disables the button control that
             -- allows the religious units to be enqueued
@@ -250,9 +255,10 @@ function GetData()
                 ReligiousStrength   = row.ReligiousStrength,
                 IsCurrentProduction = row.Hash == m_CurrentProductionHash
             };
-
+            
             table.insert(new_data.UnitItems, kUnit );
         end
+        
     end
 
     return new_data
