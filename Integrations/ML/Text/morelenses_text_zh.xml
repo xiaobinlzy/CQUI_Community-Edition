@@ -50,19 +50,26 @@
     </Replace>
 
     <!-- City Overlap Lens -->
-    <Replace Tag="LOC_HUD_CITYOVERLAP6_LENS" Language="zh_Hans_CN">
-      <Text>6格城市数</Text>
+    <Replace Tag="LOC_HUD_CITYOVERLAP_LENS" Language="zh_Hans_CN">
+        <Text>城市范围</Text>
     </Replace>
-    <Replace Tag="LOC_HUD_CITYOVERLAP6_LENS_TOOLTIP" Language="zh_Hans_CN">
-      <Text>显示地块6格范围内的城市数量</Text>
+    <Replace Tag="LOC_HUD_CITYOVERLAP_LENS_TOOLTIP" Language="zh_Hans_CN">
+        <Text>显示一个地块6格范围内的城市数量</Text>
     </Replace>
-
-    <!-- City Overlap Lens -->
-    <Replace Tag="LOC_HUD_CITYOVERLAP9_LENS" Language="zh_Hans_CN">
-      <Text>9格城市数</Text>
+    <Replace Tag="LOC_PANEL_CITYOVERLAP_OPTION1" Language="zh_Hans_CN">
+        <Text>高亮外部边框</Text>
     </Replace>
-    <Replace Tag="LOC_HUD_CITYOVERLAP9_LENS_TOOLTIP" Language="zh_Hans_CN">
-      <Text>显示地块9格范围内的城市数量</Text>
+    <Replace Tag="LOC_PANEL_CITYOVERLAP_NMOUSE" Language="zh_Hans_CN">
+        <Text>非鼠标</Text>
+    </Replace>
+    <Replace Tag="LOC_PANEL_CITYOVERLAP_RANGE" Language="zh_Hans_CN">
+        <Text>鼠标范围</Text>
+    </Replace>
+    <Replace Tag="LOC_TOOLTIP_CITYOVERLAP_RANGE" Language="zh_Hans_CN">
+        <Text>显示鼠标所指地块并高亮范围（下方设置）内的城市</Text>
+    </Replace>
+    <Replace Tag="LOC_PANEL_CITYOVERLAP_RADIUS" Language="zh_Hans_CN">
+        <Text>鼠标半径</Text>
     </Replace>
 
     <!-- Barbarian Lens -->
